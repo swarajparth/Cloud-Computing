@@ -102,7 +102,7 @@ root@02UwU3:/# ls
 
 # Example
 ```sh
-C:\Users\USER>docker container ls
+C:\Users\USER> docker container ls
 CONTAINER ID   IMAGE             COMMAND     CREATED          STATUS          PORTS     NAMES
 ffdff95d7500   python:3.8-slim   "python3"   23 seconds ago   Up 21 seconds             pyshyam
 d0f9f5a3378f   python:3.8-slim   "python3"   7 minutes ago    Up 7 minutes              pyC
