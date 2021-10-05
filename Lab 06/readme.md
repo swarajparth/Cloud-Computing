@@ -81,14 +81,52 @@ Create a new folder or use an existing one
 ```sh
 mkdir testfolder
 ```
+Note: After making the folder we need to put the python codes inside that **testfolder**(which is in the local machine, not be present in docker container) so that our docker container can copy those files from the **testfolder** to the **myfolder**(which is inside of the docker conatiner).<br/>
+For example here we have the **[lab_06.py](https://github.com/swarajparth/Cloud-Computing/blob/main/Lab%2006/lab_6.py)** file which has been kept inside the **testfolder** and then we run the following two commands(respectively two below commands) to copy that **testfolder** conatins to the **myfolder** conatainer.
 Find out the path of your folder
+```sh
+dir
+```
+Use the following command to copy the files of the **testfolder** folder to **myfolder** folder.<br/>
+```sh
+docker run -dit --name=pyC -v C:\Users\USER\testfolder:/home/myfolder python:3.8-slim
+```
+Now execute..
+```sh
+docker exec -it pyC /bin/bash
+```
+Note: your mounted folder should up as 'myfolder'. Any changes in this directory should show up in both your local machine and this container.
+```sh
+root@02UwU3:/# ls
+```
 
+# Example
+```sh
+C:\Users\USER>docker container ls
+CONTAINER ID   IMAGE             COMMAND     CREATED          STATUS          PORTS     NAMES
+ffdff95d7500   python:3.8-slim   "python3"   23 seconds ago   Up 21 seconds             pyshyam
+d0f9f5a3378f   python:3.8-slim   "python3"   7 minutes ago    Up 7 minutes              pyC
+21caead621be   python:3.8-slim   "python3"   28 minutes ago   Up 28 minutes             pyContainer
 
+C:\Users\USER> docker exec -it pyshyam /bin/bash
+root@ffdff95d7500:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 
+root@ffdff95d7500:/# cd home
 
+root@ffdff95d7500:/home# ls
+myfolder
 
+root@ffdff95d7500:/home# cd myfolder/
 
+root@ffdff95d7500:/home/myfolder# ls
+python.txt  python_file.py
 
+root@ffdff95d7500:/home/myfolder# python python_file.py
+The distance is :  10.63014581273465
 
-Created by @shyammarjit
+root@ffdff95d7500:/home/myfolder# exit.
+```
+
+Created by @shyammarjit.
 
